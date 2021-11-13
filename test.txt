@@ -1,0 +1,179 @@
+import React, { useState } from "react";
+
+const FormPage = () => {
+  // const [fullName, setFullName] = useState("")
+  const [formState, setFormState] = useState({
+    fullName: "",
+  });
+
+  
+
+  const handleSubmitForm = (evt) => {
+    evt.preventDefault();
+    console.log(formState);
+  };
+
+  const handleChange = (evt) => {
+    const { value, name } = evt.target;
+
+    console.log("Value :", value);
+    // setFormState({
+    //   [name]:value
+    // })
+    // setFormState((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     [name]: value,
+    //   };
+    // });
+    //lambda function
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <div className="d-flex justify-content-center w-100">
+      <form onSubmit={handleSubmitForm} className="w-50 row">
+        <div className="form-group">
+          <label htmlFor="fullName" className="form-label">
+            Full Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="fullName"
+            placeholder="John Doe"
+            name="fullName"
+            value={formState.fullName || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="email" className="form-label">
+            Email address
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            value={formState.email || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="gender" className="form-label">
+            Gender
+          </label>
+          <select
+            name="gender"
+            className="form-select"
+            id="gender"
+            aria-label="Default select example"
+            value={formState.gender || ""}
+            onChange={handleChange}
+          >
+            <option>--Select one</option>
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+            <option value="o">Other</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="bio" className="form-label">
+            Bio
+          </label>
+          <textarea
+            name="bio"
+            className="form-control"
+            id="bio"
+            rows="3"
+            value={formState.bio || ""}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+
+        <div className="col-sm-10">
+          <label className="form-label">Income range</label>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="income_range"
+              id="range1"
+              value="range1"
+              onChange={handleChange}
+            />
+            <label className="form-check-label" htmlFor="range1">
+              100-500
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="income_range"
+              id="range2"
+              value="range2"
+              onChange={handleChange}
+            />
+            <label className="form-check-label" htmlFor="range2">
+              500-1000
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="income_range"
+              id="range3"
+              value="range3"
+              onChange={handleChange}
+            />
+            <label className="form-check-label" htmlFor="range3">
+              1000-2000
+            </label>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="formFile">Picture</label>
+          <input
+            // value={formState.picture || ""}
+            onChange={handleChange}
+            type="file"
+            className="form-control-file"
+            id="formFile"
+            name="picture"
+          />
+        </div>
+
+        <div className="form-check">
+          <input
+            value={formState.rules || ""}
+            onChange={handleChange}
+            type="checkbox"
+            className="form-check-input"
+            id="exampleCheck1"
+            name="rules"
+          />
+          <label className="form-check-label" htmlFor="exampleCheck1">
+            Check me out
+          </label>
+        </div>
+
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default FormPage;
